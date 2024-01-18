@@ -29,6 +29,23 @@
 
         andrewPlusChildren(plusOne, firstChild, secondChild);
 
+        function andrewSum(a, b, c) {
+            return a + b + c; 
+        }
+
+        let resultSum = andrewSum(1, 2, 3);
+        console.log(resultSum);
+
+        function andrewScope(x) {
+            let y = 1; 
+            return x + y;
+        }
+
+        let y = 2;
+        let x = 3;
+        let resultAndrewScope = andrewScope(7);
+        console.log(resultAndrewScope);
+        console.log(y);
 
 
 

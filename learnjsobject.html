@@ -13,7 +13,7 @@
         gender: "Male",
         major: "Informatics Engineering",
         hello: function() {
-            console.log("Hello");
+            console.log("Hello " + this.name + "!");
         }
     }
 
@@ -28,6 +28,20 @@
     //Call a method
     student.hello();
 
+    function Student(name, studentID, gender, major) {
+        this.name = name; 
+        this.studentID = studentID;
+        this.gender = gender;
+        this.major = major;
+    }
+
+    let student1 = new Student("Abdul", "123", "Male", "IS");
+    let student2 = new Student("Badu", "231", "Male", "IE");
+    let student3 = new Student("Cecep", "456", "Female", "IE");
+
+    console.log(student1.name);
+    console.log(student3.name);
+    console.log(student3.gender)
 
     </script>
     

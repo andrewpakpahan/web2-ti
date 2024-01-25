@@ -12,6 +12,9 @@
         studentID : "0242007",
         gender: "Male",
         major: "Informatics Engineering",
+        hello: function() {
+            console.log("Hello");
+        }
     }
 
     console.log(student.name);
@@ -19,7 +22,12 @@
     console.log(student["gender"]);
     console.log(student["major"]);
 
-    
+    student.name = "Budi";
+    console.log(student.name);
+
+    //Call a method
+    student.hello();
+
 
     </script>
     

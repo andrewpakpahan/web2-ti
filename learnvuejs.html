@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn VueJS</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+        .yellow {
+            color: yellow;
+        }
+        .green {
+            color: green;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -15,6 +29,25 @@
         My hobbies are: {{ hobbies }}
         <br>
         My address is {{ address }}
+        
+        Message: <input type="text" v-model="message"> <br>
+        Name: <input type="text" v-model="name">
+    
+        <h1 v-if="on">Displayed if property on is true</h1>
+        <h1 v-else>Displayed if property on is false</h1>
+
+        <br>
+        <hr>
+        Age: <input type="text" v-model="age">
+        <h3 v-if="age <= 17">You're still young</h3>
+        <h3 v-else>You're old</h3>
+
+        <br>
+        <img v-bind:src="image" alt="UNAI Chapel">
+
+        <h2 v-bind:class="textColor">This is a title</h2> <br>
+        Text color: <input type="text" v-model="textColor">
+        
     </div>
 
     <script>
@@ -23,6 +56,9 @@
         createApp({
             data() {
                 return {
+                    textColor: 'red',
+                    image: 'tugu_unai.jpeg',
+                    on: false,
                     message: 'Hello Vue!', 
                     name: 'Andrew',
                     //Create 3 other properties and display them

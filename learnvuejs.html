@@ -11,7 +11,10 @@
         {{ message }} from {{ name }} 
         <br>
         My id is {{ id }}, my age is {{ age }}, my gender is {{ gender }}
-
+        <br>
+        My hobbies are: {{ hobbies }}
+        <br>
+        My address is {{ address }}
     </div>
 
     <script>
@@ -28,7 +31,15 @@
                     gender: 'Male',
                     //Create a property using array data type
                     //the array should consist of at least 3 items
-                    hobbies: ['Badminton', 'Basketball', 'Traveling']
+                    hobbies: ['Badminton', 'Basketball', 'Traveling'],
+                    //Create a property using object data type
+                    // the object should have at least 3 properties
+                    address: {
+                        street: 'Jl. Kolonel Masturi No. 288',
+                        district: 'Parongpong',
+                        regency: 'Bandung Barat',
+                        province: 'West Java'
+                    }
 
                 }
             }

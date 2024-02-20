@@ -7,7 +7,12 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div id="app">{{ message }} from {{ name }} </div>
+    <div id="app">
+        {{ message }} from {{ name }} 
+        <br>
+        My id is {{ id }}, my age is {{ age }}, my gender is {{ gender }}
+
+    </div>
 
     <script>
         const { createApp } = Vue
@@ -17,6 +22,14 @@
                 return {
                     message: 'Hello Vue!', 
                     name: 'Andrew',
+                    //Create 3 other properties and display them
+                    id: 123, 
+                    age: 17,
+                    gender: 'Male',
+                    //Create a property using array data type
+                    //the array should consist of at least 3 items
+                    hobbies: ['Badminton', 'Basketball', 'Traveling']
+
                 }
             }
         }).mount('#app');

@@ -17,6 +17,12 @@
 
         <h3 v-if="count >= 10">Congratulations! You have 10 counts or more!</h3>
 
+        Products: 
+        <ul>
+            <li v-for="product in products">
+                {{ product }}
+            </li>
+        </ul>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -28,7 +34,8 @@
                 return {
                     message: 'Hello Vue!', 
                     name: 'Andrew Pakpahan',
-                    count: 0
+                    count: 0, 
+                    products: ['Macbook Pro', 'Macbook Air', 'iPad']
                 }
             }
         }).mount('#app')

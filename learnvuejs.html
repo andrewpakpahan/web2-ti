@@ -47,7 +47,21 @@
 
         <h2 v-bind:class="textColor">This is a title</h2> <br>
         Text color: <input type="text" v-model="textColor">
-        
+        <br>
+        <br>
+        <li v-for="item in items">
+            {{ item.message }}
+        </li>
+
+        <br>
+        Hobbies: <li v-for="hobby in hobbies">
+            {{ hobby }}
+        </li>
+
+        Address street: {{ address.street }}, {{ address.province }}
+        <br><br>
+        <button v-on:click="count++">Add 1</button>
+        <p>Count is: {{ count }}</p>
     </div>
 
     <script>
@@ -56,6 +70,8 @@
         createApp({
             data() {
                 return {
+                    count: 0,
+                    items: [{ message: 'A'}, {message: 'B'}],
                     textColor: 'red',
                     image: 'tugu_unai.jpeg',
                     on: false,

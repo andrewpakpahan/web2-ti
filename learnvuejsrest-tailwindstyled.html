@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn VueJS with REST API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="app">
+      <nav
+        class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600"
+      >
+        <div
+          class="container flex flex-wrap items-center justify-between mx-auto"
+        >
+          <a href="https://fti.unai.edu/" class="flex items-center">
+            <img
+              src="https://fti.unai.edu/wp-content/uploads/2020/07/LogoFTI-UNAI.png"
+              class="h-6 mr-3 sm:h-9"
+              alt="FTI UNAI Logo"
+            />
+            <span
+              class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+              >FTI UNAI</span
+            >
+          </a>
+          <div class="flex md:order-2">
+            <button
+              type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Get started
+            </button>
+            <button
+              data-collapse-toggle="navbar-sticky"
+              type="button"
+              class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="navbar-sticky"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="w-6 h-6"
+                aria-hidden="true"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div
+            class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-sticky"
+          >
+            <ul
+              class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                  aria-current="page"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Users</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="flex flex-wrap items-center justify-between mt-20 p-10">
+        <div class="flex-1">
+          <h1
+            class="mb-4 text-xl font-bold leading-none tracking-tight text-gray-900 dark:text-white"
+          >
+            Users
+          </h1>
+          <div class="relative overflow-x-auto">
+            <table
+              class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr>
+                  <th class="px-6 py-3">ID</th>
+                  <th class="px-6 py-3">Username</th>
+                  <th class="px-6 py-3">First name</th>
+                  <th class="px-6 py-3">Last name</th>
+                  <th class="px-6 py-3">Email</th>
+                  <th class="px-6 py-3">Avatar</th>
+                  <th class="px-6 py-3">Actions</th>
+                </tr>
+              </thead>
+              <tr
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                v-for="user in users"
+              >
+                <td class="px-6 py-4">{{ user.id }}</td>
+                <td class="px-6 py-4">{{ user.username }}</td>
+                <td class="px-6 py-4">{{ user.firstname}}</td>
+                <td class="px-6 py-4">{{ user.lastname }}</td>
+                <td class="px-6 py-4">{{ user.email }}</td>
+                <td class="px-6 py-4"><img :src="user.avatar" /></td>
+                <td class="px-6 py-4">
+                  <button
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    @click="getEditUser(user)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    @click="deleteUser(user)"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="flex-1 m-4 p-4 border border-gray-200 rounded-xl">
+          <form @submit.prevent="" class="mt-4">
+            <h1
+              class="mb-4 text-xl font-bold leading-none tracking-tight text-gray-900 dark:text-white"
+            >
+              Add User
+            </h1>
+            <div class="mb-3">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Username:
+              </label>
+              <input
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                v-model="user.username"
+                placeholder="Username"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Firstname :
+              </label>
+              <input
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                v-model="user.firstname"
+                placeholder="First Name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Lastname:
+              </label>
+              <input
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                v-model="user.lastname"
+                placeholder="Last Name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Email:
+              </label>
+              <input
+                type="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                v-model="user.email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Avatar:
+              </label>
+              <input
+                type="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                v-model="user.avatar"
+                placeholder="avatar URL"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <button
+                v-if="!isEdit"
+                @click="addUser"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                type="submit"
+              >
+                Add User
+              </button>
+              <button
+                v-if="isEdit"
+                @click="updateUser"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                type="submit"
+              >
+                Update User
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            users: [],
+            user: {
+              username: "",
+              firstname: "",
+              lastname: "",
+              email: "",
+              avatar: "",
+            },
+            isEdit: false,
+            userIdSelected: "",
+            editMode: false,
+          };
+        },
+        mounted: function () {
+          this.getUsers();
+        },
+        methods: {
+          getUsers() {
+            axios
+              .get("https://65ddea6ddccfcd562f55d239.mockapi.io/users")
+              .then((response) => {
+                this.users = response.data;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          },
+          addUser: function () {
+            axios
+              .post("https://65ddea6ddccfcd562f55d239.mockapi.io/users", {
+                username: this.user.username,
+                firstname: this.user.firstname,
+                lastname: this.user.lastname,
+                email: this.user.email,
+                avatar: this.user.avatar,
+              })
+              .then((response) => {
+                this.getUsers();
+                alert("New user has been saved");
+                console.log(response);
+                this.resetForm();
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          },
+          getEditUser: function (user) {
+            this.isEdit = true;
+            this.userIdSelected = user.id;
+            this.user.username = user.username;
+            this.user.firstname = user.firstname;
+            this.user.lastname = user.lastname;
+            this.user.email = user.email;
+            this.user.avatar = user.avatar;
+          },
+          updateUser: function () {
+            axios
+              .put(
+                `https://65ddea6ddccfcd562f55d239.mockapi.io/users/${this.userIdSelected}`,
+                {
+                  username: this.user.username,
+                  firstname: this.user.firstname,
+                  lastname: this.user.lastname,
+                  email: this.user.email,
+                  avatar: this.user.avatar,
+                }
+              )
+              .then((response) => {
+                this.getUsers();
+                alert("User has been updated");
+                console.log(response);
+                this.isEdit = false;
+                this.resetForm();
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          },
+          // Delete User
+          deleteUser: function (user) {
+            if (confirm("Are you user want to delete this user?")) {
+              axios
+                .delete(
+                  `https://65ddea6ddccfcd562f55d239.mockapi.io/users/${user.id}`
+                )
+                .then((res) => {
+                  // handle success
+                  alert("User has been deleted");
+                  this.getUsers();
+                  this.resetForm();
+                })
+                .catch((err) => {
+                  // handle error
+                  console.log(err);
+                });
+            }
+          },
+          resetForm: function () {
+            this.isEdit = false;
+            this.userIdSelected = null;
+            this.user.username = "";
+            this.user.firstname = "";
+            this.user.lastname = "";
+            this.user.email = "";
+            this.user.avatar = "";
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

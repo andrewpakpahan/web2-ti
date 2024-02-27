@@ -28,6 +28,19 @@
             </tr>
         </table>
         <button @click="getUsers">Get Users</button>
+
+        <br><br>
+
+        <form @submit.prevent="">
+            <h3>Form User</h3>
+            <label>Username: </label>
+            <input type="text" v-model="user.username"><br>
+            <label>Firstname: </label><input type="text" v-model="user.firstname"><br>
+            <label>Lastname: </label><input type="text" v-model="user.lastname"><br>
+            <label>Email: </label><input type="text" v-model="user.email"><br>
+            <label>Avatar: </label><input type="text" v-model="user.avatar"><br>
+            <button @click="addUser">Add User</button>
+        </form>
     </div>
     <script>
         const { createApp } = Vue
@@ -35,7 +48,14 @@
         createApp({
             data() {
                 return {
-                    users: []
+                    users: [],
+                    user: {
+                        username: '',
+                        firstname: '',
+                        lastname: '',
+                        email: '',
+                        avatar: ''
+                    }
                 }
             }, 
             methods: {
@@ -45,6 +65,32 @@
                         .then((response) => {
                             this.users = response.data
                         })
+                }, 
+                addUser() {
+                    axios
+                        .post("https://65ddea6ddccfcd562f55d239.mockapi.io/users", {
+                            username: this.user.username,
+                            firstname: this.user.firstname,
+                            lastname: this.user.lastname,
+                            email: this.user.email,
+                            avatar: this.user.avatar,
+                        })
+                        .then((response) => {
+                            this.getUsers();
+                            alert("New user has been saved");
+                            console.log(response);
+                            this.resetForm();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                resetForm() {
+                    this.user.username = ''
+                    this.user.firstname = ''
+                    this.user.lastname = ''
+                    this.user.email = ''
+                    this.user.avatar = ''
                 }
             }
         }).mount('#app')

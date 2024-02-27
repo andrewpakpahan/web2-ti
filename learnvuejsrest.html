@@ -17,6 +17,7 @@
                 <th>Lastname</th>
                 <th>Email</th>
                 <th>Avatar</th>
+                <th>Actions</th>
             </tr>
             <tr v-for="user in users">
                 <td>{{ user.id }}</td>
@@ -25,6 +26,10 @@
                 <td>{{ user.lastname }} </td>
                 <td>{{ user.email }}</td>
                 <td><img v-bind:src="user.avatar"></td>
+                <td>
+                    <button @click="getEditUser(user)">Edit</button>
+                    <button @click="deleteUser(user)">Delete</button>
+                </td>
             </tr>
         </table>
         <button @click="getUsers">Get Users</button>
@@ -39,7 +44,8 @@
             <label>Lastname: </label><input type="text" v-model="user.lastname"><br>
             <label>Email: </label><input type="text" v-model="user.email"><br>
             <label>Avatar: </label><input type="text" v-model="user.avatar"><br>
-            <button @click="addUser">Add User</button>
+            <button v-if="!isEdit" @click="addUser">Add User</button>
+            <button v-if="isEdit" @click="updateUser">Update User</button>
         </form>
     </div>
     <script>
@@ -55,7 +61,9 @@
                         lastname: '',
                         email: '',
                         avatar: ''
-                    }
+                    }, 
+                    isEdit: false, 
+                    userIdSelected: null
                 }
             }, 
             methods: {
@@ -84,6 +92,56 @@
                         .catch((error) => {
                             console.log(error);
                         });
+                },
+                getEditUser(user) {
+                    this.isEdit = true
+                    this.userIdSelected = user.id
+                    this.user.username = user.username
+                    this.user.firstname = user.firstname
+                    this.user.lastname = user.lastname
+                    this.user.email = user.email
+                    this.user.avatar = user.avatar
+                }, 
+                updateUser() {
+                    axios
+                    .put(
+                        `https://65ddea6ddccfcd562f55d239.mockapi.io/users/${this.userIdSelected}`,
+                        {
+                        username: this.user.username,
+                        firstname: this.user.firstname,
+                        lastname: this.user.lastname,
+                        email: this.user.email,
+                        avatar: this.user.avatar,
+                        }
+                    )
+                    .then((response) => {
+                        this.getUsers();
+                        alert("User has been updated");
+                        console.log(response);
+                        this.isEdit = false;
+                        this.resetForm();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                },
+                deleteUser(user) {
+                    if (confirm("Are you user want to delete this user?")) {
+                    axios
+                        .delete(
+                        `https://65ddea6ddccfcd562f55d239.mockapi.io/users/${user.id}`
+                        )
+                        .then((res) => {
+                        // handle success
+                        alert("User has been deleted");
+                        this.getUsers();
+                        this.resetForm();
+                        })
+                        .catch((err) => {
+                        // handle error
+                        console.log(err);
+                        });
+                    }
                 },
                 resetForm() {
                     this.user.username = ''

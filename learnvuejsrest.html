@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn VueJS with Axios for REST APIs</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Avatar</th>
+            </tr>
+            <tr v-for="user in users">
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.firstname }} </td>
+                <td>{{ user.lastname }} </td>
+                <td>{{ user.email }}</td>
+                <td><img v-bind:src="user.avatar"></td>
+            </tr>
+        </table>
+        <button @click="getUsers">Get Users</button>
+    </div>
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    users: []
+                }
+            }, 
+            methods: {
+                getUsers() {
+                    axios
+                        .get('https://65ddea6ddccfcd562f55d239.mockapi.io/users')
+                        .then((response) => {
+                            this.users = response.data
+                        })
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

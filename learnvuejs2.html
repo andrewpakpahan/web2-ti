@@ -43,6 +43,9 @@
         </ul>
         <input v-model="newMessage" type="text">
         <button @click="addMessage">Send</button>
+
+        <br><br>
+        <button @click="alertYourName">Alert your name</button>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -62,7 +65,8 @@
                         { productName: 'Samsung S27', productPrice: 77 },
                         { productName: 'Xiaomi 90', productPrice: 99},
                         { productName: 'Oppo V77', productPrice: 100 }
-                    ]
+                    ],
+                    todos: [],
                 }
             },
             methods: {
@@ -75,7 +79,16 @@
                 addMessage() {
                     this.messages.push(this.newMessage)
                     this.newMessage = ''
+                },
+                alertYourName() {
+                    fetch('https://jsonplaceholder.typicode.com/todos/1')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.todos = data
+                        })
+                    console.log(this.todos)
                 }
+                
             }
         }).mount('#app')
     </script>
